@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-ECommerceMVC-e7f31049-4efa-4b9c-ac5e-6750be9b8db8</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.14" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.14" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.14" />
+  </ItemGroup>
+
+</Project>
