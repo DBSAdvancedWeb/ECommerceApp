@@ -1,6 +1,10 @@
-# Creating MVC Web Applications
+# MVC 1: Creating MVC Web Applications
 
-ASP.NET Core MVC Website that will have its own local DB and setup for Authentication. .Net Core provides a lot of handy setups out of the box using its cli or via Visual Studio. 
+ASP.NET Core MVC Website that will have its own local DB and setup for Authentication. .Net Core provides a lot of handy setups out of the box using its cli or via Visual Studio.
+
+## Prerequisites:
+
+Basic understanding of C#, ASP.NET Core.
 
 ## Help Info
 
@@ -78,3 +82,10 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: C:\Users\andyf\Coding\AdvancedWeb\ECommerceApp\ECommerceMVC
 ```
+
+
+### Related Articles
+
+* MVC Overview: https://learn.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-7.0
+* Getting Started: https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-7.0&tabs=visual-studio-code
+
