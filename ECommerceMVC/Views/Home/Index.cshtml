@@ -1,33 +1,10 @@
-﻿@page
+﻿@model IEnumerable<ECommerceMVC.Models.Product>
 @functions
 {    
     public string GetTodaysDate()
     {
         return DateTime.Now.ToString("dddd");
     }
-
-    public class Product
-    {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-        public string? ImageUrl { get; set; }
-        public double? Price {get; set;}
-    };
-
-    private List<Product> Products { get; set; } = new List<Product>()
-    {
-        new Product { Id = 1, Name = "Fitness Trackers", Description = "Aliexpress fintness trackers", ImageUrl = "imgs/aliexpress-fitness-trackers.jpg", Price = 89.99 },
-        new Product { Id = 2, Name = "Black Bag", Description = "Black over the shoulder bag", ImageUrl = "imgs/black-bag-over-the-shoulder.jpg", Price = 59.95 },
-        new Product { Id = 2, Name = "Runners", Description = "Black Sneakers with white sole", ImageUrl = "imgs/black-sneakers-with-white-sole.jpg", Price = 40.00 },
-        new Product { Id = 1, Name = "Headphones", Description = "Volume Control Headphones", ImageUrl = "imgs/volume-control-headphones.jpg", Price = 179.99 },
-        new Product { Id = 2, Name = "Sport Runners", Description = "All black sports runners", ImageUrl = "imgs/right-foot-all-black-sneaker.jpg", Price = 44.99 },
-        new Product { Id = 2, Name = "QR Codes", Description = "QR Codes In Store", ImageUrl = "imgs/qr-codes-in-store.jpg", Price = 2.99 },
-        new Product { Id = 1, Name = "Gemstone Necklace", Description = "Purple Gemstone necklace", ImageUrl = "imgs/purple-gemstone-necklace.jpg", Price = 19.95 },
-        new Product { Id = 2, Name = "Modern Watch", Description = "Modern time piece watch", ImageUrl = "imgs/modern-time-pieces.jpg", Price = 45.00 },
-        new Product { Id = 2, Name = "Leather Jacket", Description = "Kids Leather Jacket", ImageUrl = "imgs/kids-leather-jacket.jpg", Price = 119.99 }
-    };
-
 }
 
 <div class="text-center">
@@ -38,7 +15,7 @@
 </div>
 
 <div class="row">
-    @foreach (var product in Products)
+    @foreach (var product in Model)
     {
         <div class="col-md-4">
             <div class="card mb-3">
@@ -47,11 +24,10 @@
                     <h5 class="card-title">@product.Name</h5>
                     <p class="card-text">@product.Description</p>
                     <div class="text-end">
-                        <i class="bi bi-fire"></i>
                         <strong class="text-success">
-                            @if (@product.Price < 40)
+                            @if (@product.Price < 50)
                             {
-                                <i class="bi bi-fire"></i>
+                                <i class="bi bi-fire text-danger"></i>
                             }
                             € @product.Price
                         </strong>
