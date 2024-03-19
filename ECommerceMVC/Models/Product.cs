@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ECommerceMVC.Models;
 
 public class Product
@@ -8,4 +10,7 @@ public class Product
     public string? Category {get; set; }
     public string? ImageUrl { get; set; }
     public double? Price {get; set;}
+    
+    [DataType(DataType.Date)]
+    public DateTime? DateAdded {get; set;}
 };
