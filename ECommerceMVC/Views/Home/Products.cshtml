@@ -1,34 +1,48 @@
 @model IEnumerable<IGrouping<string, ECommerceMVC.Models.Product>>
 
-<div class="text-center">
-    <h1 class="display-4">Product Categories</h1>
+<div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-10">
+        <h1 class="display-6">Product Categories</h1>
+    </div>
 </div>
 
-@foreach (var group in Model)
-{
-    <h3>@group.Key</h3>
-    <div class="row">
-        @foreach (var item in group)
+<div class="row">
+    <div class="col-2">
+        <partial name="_LeftHandNav" />
+    </div>
+    <div class="col-10">
+
+        @foreach (var group in Model)
         {
-    <div class="col-md-4">
-            <div class="card mb-3">
-                <img src="~/@item.ImageUrl" class="card-img-top" alt="@item.Name Image">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Description</p>
-                    <div class="text-end">
-                        <strong class="text-success">
-                        @if (@item.Price < 50)
-                        {
-                            <i class="bi bi-fire text-danger"></i>    
-                        }
-                        € @item.Price
-                        </strong>
+            <h3>@group.Key</h3>
+            <div class="row">
+                @foreach (var item in group)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <img src="~/@item.ImageUrl" class="card-img-top" alt="@item.Name Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                            <div class="text-end">
+                                <strong class="text-success">
+                                @if (@item.Price < 50)
+                                {
+                                    <i class="bi bi-fire text-danger"></i>    
+                                }
+                                € @item.Price
+                                </strong>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div>   
+                }
             </div>
-        </div>   
         }
     </div>
-}
+</div>
+
 

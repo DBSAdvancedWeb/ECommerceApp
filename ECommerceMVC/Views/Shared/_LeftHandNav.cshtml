@@ -1,0 +1,11 @@
+@model IEnumerable<IGrouping<string, ECommerceMVC.Models.Product>>
+
+<ul class="list-group"> 
+@foreach(var product in Model)
+{
+  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    @product.Key
+    <span class="badge bg-success">@product.Count()</span>
+  </li>
+}
+</ul>
