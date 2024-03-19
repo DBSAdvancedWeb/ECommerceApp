@@ -131,7 +131,7 @@ public class Product
 ```c#
     public IActionResult Index()
     {
-        List<Product> Products = GetProductsList();
+        IEnumerable<Product> Products = GetProductsList();
         return View(Products);
     }
 ```
