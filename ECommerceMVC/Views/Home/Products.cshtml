@@ -26,19 +26,20 @@
                             <img src="~/@item.ImageUrl" class="card-img-top" alt="@item.Name Image">
                             <div class="card-body">
                                 <h5 class="card-title">@item.Name</h5>
-                            <p class="card-text">@item.Description</p>
-                            <div class="text-end">
-                                <strong class="text-success">
-                                @if (@item.Price < 50)
-                                {
-                                    <i class="bi bi-fire text-danger"></i>    
-                                }
-                                € @item.Price
-                                </strong>
+                                <p class="card-text">@item.Description</p>
+                                    <strong class="text-success">
+                                    @if (@item.Price < 50)
+                                    {
+                                        <i class="bi bi-fire text-danger"></i>    
+                                    }
+                                    € @item.Price
+                                    </strong>
+                                    <a href="#" data-product="@Json.Serialize(item).ToString()" class="cart-btn btn btn-outline-success btn-sm float-end">
+                                        <i class="bi bi-cart-plus"></i> Add 
+                                    </a>
                             </div>
                         </div>
-                    </div>
-                </div>   
+                    </div>   
                 }
             </div>
         }
