@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ECommerceMVC.Models;
 using ECommerceMVC.Services;
 
+
 namespace ECommerceMVC.Controllers;
 
 public class HomeController : Controller
@@ -10,10 +11,13 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly DealsService _dealService;
 
-    public HomeController(ILogger<HomeController> logger, DealsService dealsService)
+    private readonly IHttpContextAccessor _sessionCtx;
+
+    public HomeController(ILogger<HomeController> logger, DealsService dealsService, IHttpContextAccessor sessionCtx)
     {
         _logger = logger;
         _dealService = dealsService;
+        _sessionCtx = sessionCtx;
     }
     public IActionResult Index()
     {
