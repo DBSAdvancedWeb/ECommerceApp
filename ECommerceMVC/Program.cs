@@ -18,6 +18,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<DealsService>();
 builder.Services.AddScoped<ICartSessionService, CartSessionService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddDistributedMemoryCache();
 

@@ -13,4 +13,5 @@ public class Product
     
     [DataType(DataType.Date)]
     public DateTime? DateAdded {get; set;}
+    public ICollection<OrderItem>? OrderItems { get; set; }
 };
