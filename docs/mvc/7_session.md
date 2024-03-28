@@ -320,6 +320,6 @@ Implement the following:
 3. Create a Cart Icon that appears on the top right of the screen
     * Should be visible 
     * Should show the number of items in the cart
-4. Improve the Shopping cart by allowing a user to add Quantity when buying?
+4. Improve the Shopping cart by allowing a user to add Quantity when buying
 
 

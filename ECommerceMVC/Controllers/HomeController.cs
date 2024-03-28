@@ -10,14 +10,13 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly DealsService _dealService;
+    private readonly ICartSessionService _cartService;
 
-    private readonly IHttpContextAccessor _sessionCtx;
-
-    public HomeController(ILogger<HomeController> logger, DealsService dealsService, IHttpContextAccessor sessionCtx)
+    public HomeController(ILogger<HomeController> logger, DealsService dealsService, ICartSessionService cartService)
     {
         _logger = logger;
         _dealService = dealsService;
-        _sessionCtx = sessionCtx;
+        _cartService = cartService;
     }
     public IActionResult Index()
     {
@@ -28,6 +27,11 @@ public class HomeController : Controller
     public IActionResult Products(){
         var categories = _dealService.GetProductCategories();
         return View(categories);
+    }
+
+    public IActionResult Cart(){
+        IEnumerable<Product> shoppingList = _cartService.GetCart();
+        return View(shoppingList);
     }
 
     public IActionResult Privacy()
