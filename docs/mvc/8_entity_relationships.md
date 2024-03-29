@@ -44,9 +44,6 @@ public ICollection<OrderItem>? OrderItems { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
-        modelBuilder.Entity<OrderItem>()
-            .HasKey(oi => oi.Id);
         //we use a composite key here of OrderId and ProductId
         modelBuilder.Entity<OrderItem>()
             .HasKey(oi => new { oi.OrderId, oi.ProductId });
@@ -79,7 +76,7 @@ dotnet ef database update
 namespace ECommerceMVC.Services;
 public interface IOrderService
 {
-    public bool CreateOrder(List<int> productIds);
+    public void CreateOrder(List<int> productIds);
 }
 ```
 2. Next, create a new class called OrderService which implements the IOrderService:
@@ -96,7 +93,7 @@ public class OrderService : IOrderService
     {
             _context = context;
     }
-    public bool CreateOrder(List<int> productIds)
+    public void CreateOrder(List<int> productIds)
     {
         throw new NotImplementedException();
     }
