@@ -1,0 +1,36 @@
+
+@model IEnumerable<IGrouping<int, OrderDetails>>;
+@{
+    ViewData["Title"] = "Your Orders";
+}
+
+<h1>Your Orders</h1>
+
+@foreach (var order in Model)
+{
+<div class="card">
+  <div class="card-header d-flex w-100 justify-content-between">
+    <span>Ordered On: @order.First().OrderDate</span>
+    <span>Order # @order.Key</span>
+  </div>
+    <div class="list-group list-group-flush">
+        @foreach (var item in order)
+        {
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@item.ProductName</h5>
+                    <small>€ @item.ProductPrice</small>
+                </div>
+                <p class="mb-1">@item.ProductDescription</p>
+                <small>Quantity: @item.Quantity</small>
+            </a>
+        }
+    </div>
+  <div class="card-footer d-flex w-100 justify-content-between">
+    <strong>Total:</strong> 
+    <strong>€ @order.Sum(od => od.ProductPrice)</strong>
+  </div> 
+</div>
+<br />
+<br />
+} 
