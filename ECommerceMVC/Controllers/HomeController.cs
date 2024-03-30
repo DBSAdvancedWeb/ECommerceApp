@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using ECommerceMVC.Models;
 using ECommerceMVC.Services;
 
-
 namespace ECommerceMVC.Controllers;
 
 public class HomeController : Controller

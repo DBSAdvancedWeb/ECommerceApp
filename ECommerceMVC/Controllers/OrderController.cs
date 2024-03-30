@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using ECommerceMVC.Services;
+using ECommerceMVC.ViewModel;
 
 
 namespace ECommerceMVC.Controllers;
@@ -16,17 +17,27 @@ public class OrderController : Controller
         _orderService = orderService;
     }
 
+    public IActionResult Orders() {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if(userId == null) {
+          return RedirectToAction("Products", "Home");  
+        }
+
+        IEnumerable<IGrouping<int, OrderDetails>> orders = _orderService.GetOrderDetails(Guid.Parse(userId));
+        return View(orders);
+    }
+
     [HttpPost]
-    public IActionResult Create(List<int> productIds)
+    public IActionResult Create([FromBody] List<OrderCreate> orderItems)
     {
-        if(productIds == null) {
+        if(orderItems.Count == 0) {
             return RedirectToAction("Products", "Home");
         }
         //lets get our user Id!
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         
         if(userId !=  null) {
-            _orderService.CreateOrder(Guid.Parse(userId), productIds);
+            _orderService.CreateOrder(Guid.Parse(userId), orderItems);
         }
 
         return RedirectToAction("Confirmation");
