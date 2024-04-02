@@ -11,6 +11,7 @@ namespace ECommerceMVC.Models;
 public class Order
 {
     public int Id { get; set; }
+    public Guide UserId {get; set;}
     public DateTime Date { get; set; }
     public ICollection<OrderItem> OrderItems { get; set; }
 }
@@ -76,7 +77,7 @@ dotnet ef database update
 namespace ECommerceMVC.Services;
 public interface IOrderService
 {
-    public void CreateOrder(List<int> productIds);
+    public void CreateOrder(Guid userId, List<int> productIds);
 }
 ```
 2. Next, create a new class called OrderService which implements the IOrderService:
