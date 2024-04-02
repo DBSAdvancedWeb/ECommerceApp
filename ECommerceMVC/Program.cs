@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ECommerceMVC.Data;
 using ECommerceMVC.Models;
 using ECommerceMVC.Services;
+using ECommerceMVC.Services.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -19,6 +20,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<DealsService>();
 builder.Services.AddScoped<ICartSessionService, CartSessionService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddHttpClient<IProductApiServices, ProductApiService>();
 
 builder.Services.AddDistributedMemoryCache();
 

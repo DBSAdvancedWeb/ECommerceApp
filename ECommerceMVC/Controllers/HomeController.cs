@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ECommerceMVC.Models;
 using ECommerceMVC.Services;
+using ECommerceMVC.Services.Api;
 
 namespace ECommerceMVC.Controllers;
 
@@ -11,15 +12,23 @@ public class HomeController : Controller
     private readonly DealsService _dealService;
     private readonly ICartSessionService _cartService;
 
-    public HomeController(ILogger<HomeController> logger, DealsService dealsService, ICartSessionService cartService)
+    private readonly IProductApiServices _productApi;
+
+    public HomeController(
+        ILogger<HomeController> logger, 
+        DealsService dealsService, 
+        ICartSessionService cartService,
+        IProductApiServices productApi
+        )
     {
         _logger = logger;
         _dealService = dealsService;
         _cartService = cartService;
+        _productApi = productApi;
     }
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        IEnumerable<Product> Products = _dealService.GetListOfProducts();
+        IEnumerable<Product> Products = await _productApi.GetListOfProducts();
         return View(Products);
     }
 
