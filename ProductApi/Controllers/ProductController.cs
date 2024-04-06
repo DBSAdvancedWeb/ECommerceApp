@@ -32,6 +32,19 @@ namespace ProductApi.Controllers
             return await _context.Products.ToListAsync();
         }
 
+        [HttpGet("categories")]
+        public async Task<ActionResult<IEnumerable<IGrouping<string?, Product>>>> GetProductCategories()
+        {
+            var products = await _context.Products.ToListAsync();
+
+            if(products ==  null){
+                return Ok(new List<IGrouping<string?, Product>>());
+            }
+            var categories = products.GroupBy(item => item.Category)
+                                         .Select(group => new { category = group.Key, products = group.ToList() });
+            return Ok(categories);
+        }
+
         // GET: api/Product/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(Guid id)
