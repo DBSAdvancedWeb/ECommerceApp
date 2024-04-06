@@ -90,3 +90,8 @@ dotnet ef database update
 ```
 6. Open up a SQL Editor of your choice and notice how the Product table has gotten a lot bigger. It should now contain all the columns for Product, Book & Fashion. 
 7. One other column you may have noticed is the Discriminator column - this will be used to filter the data based on its type. 
+
+## Related Articles
+
+Entity Framework Inheritance: https://learn.microsoft.com/en-us/ef/core/modeling/inheritance
+
