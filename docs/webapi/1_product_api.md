@@ -1,5 +1,6 @@
 # Product API
 
+The MVC app currently has a Controller and Service that provides the Product data. We now want to move this into its own service and improve our overall architecture to have standalone microservices. We can begin by creating a new Web API using the dotnet template for webapi. 
 
 
 ## Web API
@@ -139,5 +140,5 @@ dotnet ef database update
 
 ## Tasks
 
-1. Scaffold data into the Database.
+1. Seed some data into the datbase.
 2. Create new endpoints for returning a category of products like we have from the MVC application.  
