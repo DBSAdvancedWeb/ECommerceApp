@@ -9,6 +9,12 @@ Now that we have a ProductApi we need to wire up a HttpClient in order to make H
 
 In this example we will use the Typed client approach. 
 
+## Prerequisites:
+
+* Basic understanding of C#, ASP.NET Core
+* You need to complete [Web API Lesson 1: Product API](../webapi/1_product_api.md)
+
+
 ## Getting Started
 
 1. First, inside the Services folder, create a new folder called **Api**
