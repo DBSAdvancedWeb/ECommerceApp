@@ -23,13 +23,16 @@ namespace ProductApi.Controllers
 
         // GET: api/Product
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string? productType)
         {
-          if (_context.Products == null)
-          {
-              return NotFound();
-          }
-            return await _context.Products.ToListAsync();
+            var productList = await GetProductType(productType);
+
+            if(productList == null)
+            {
+                return BadRequest($"Invalid type of '{productType}'.");
+            }
+
+            return productList;
         }
 
         [HttpGet("categories")]
@@ -127,6 +130,22 @@ namespace ProductApi.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        private async Task<ActionResult<IEnumerable<Product>>> GetProductType(string? productType)
+        {
+            IQueryable<Product> query = _context.Products;
+
+            switch(productType.ToLower()){
+                case "fashion":
+                    return await query.OfType<Fashion>().ToListAsync();
+                case "books":
+                    return await query.OfType<Book>().ToListAsync();;
+                default:
+                    //type does not exist
+                    return null;
+            }
+
         }
 
         private bool ProductExists(Guid id)

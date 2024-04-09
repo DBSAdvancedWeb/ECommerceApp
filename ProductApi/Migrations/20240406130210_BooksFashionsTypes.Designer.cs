@@ -12,8 +12,8 @@ using ProductApi.Data;
 namespace ProductApi.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20240406102714_BookFashionTypes")]
-    partial class BookFashionTypes
+    [Migration("20240406130210_BooksFashionsTypes")]
+    partial class BooksFashionsTypes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
