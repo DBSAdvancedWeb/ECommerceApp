@@ -32,8 +32,32 @@ dotnet run
 
 1. Let's start with the GET Request for getting a list of products. 
 2. Open the ECommerceCommon folder and inside it, create a new folder called Responses. 
-3. Create a new class called ProductListResponse.cs. 
+3. Create a new class called Paging.cs and add the following code:
+```c#
+namespace ECommerceCommon.Responses;
 
+public class Paging
+{
+    public int page {get; set;}
+    public int pageSize {get; set;}
+    public int totalPages {get; set;}
+    public int total {get; set;}
+}
+``` 
+4. Next, create another file called ProductListResponse.cs and add the following code:
+```c#
+using ECommerceCommon.Models;
+
+namespace CommonLibrary.Responses;
+public class ProductListResponse
+{
+    public Paging paging {get; set;}
+
+    public IEnumerable<T> data {get; set;}
+}
+```
+5. The T for the IEnumerable is for a generic object. Considering we have a Book and Fashion item, we will need this to allow different types to be built.
+6. Next, go to our ProductController.cs inside the ProductApi folder. Locate the method called GetProductType and lets change this to now use paging. 
 
 ```c#
 [HttpGet]

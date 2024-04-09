@@ -140,7 +140,17 @@ namespace ProductApi.Controllers
                 case "fashion":
                     return await query.OfType<Fashion>().ToListAsync();
                 case "books":
-                    return await query.OfType<Book>().ToListAsync();;
+                    int totalCount = await _context.Books.CountAsync();
+                    int totalPages = totalCount / pageSize;
+                    
+                    var productsPage = await _context.Books
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToListAsync();
+
+                    return await query.OfType<Book>()
+                        
+                        .ToListAsync();;
                 default:
                     //type does not exist
                     return null;
