@@ -5,7 +5,7 @@
 namespace ProductApi.Migrations
 {
     /// <inheritdoc />
-    public partial class BookFashionTypes : Migration
+    public partial class BooksFashionsTypes : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

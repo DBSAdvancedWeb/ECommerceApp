@@ -89,7 +89,68 @@ dotnet ef migrations add BooksFashionsTypes
 dotnet ef database update
 ```
 6. Open up a SQL Editor of your choice and notice how the Product table has gotten a lot bigger. It should now contain all the columns for Product, Book & Fashion. 
-7. One other column you may have noticed is the Discriminator column - this will be used to filter the data based on its type. 
+7. One other column you may have noticed is the Discriminator column - this will be used to filter the data based on its type. At present it is currently empty and this needs to have a value otherwise it will return an error. 
+8. Open up the database and go to the SQL Editor view. Run the following query:
+```sql
+UPDATE Products
+SET Discriminator = 'Fashion'
+WHERE 1 = 1; 
+```
+9. This will update all 9 records. 
+10. Load up the Product Api service and go to the Swagger UI to test the Get Request endpoint for /api/Product
+11. Click the Try it out button and then execute. 
+12. Observe the feed that comes back:
+```json
+[
+  {
+    "id": "1a01d87b-e2a0-4671-835f-2ff092f3a692",
+    "name": "Black Bag",
+    "description": "Black over the shoulder bag",
+    "category": "Bags",
+    "subCategory": null,
+    "imageSmall": null,
+    "imageMedium": null,
+    "imageLarge": null,
+    "price": 59.95,
+    "dateAdded": "2024-04-06T13:53:37.8452386"
+  },
+  ...
+]
+```
+13. You will notice that none of the attributes for Fashion return back. This is something we need to fix. Open the ProductController.cs and add a new parameter called **productType**:
+```c#
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string? productType)
+        {
+            var productList = await GetProductType(productType);
+
+            if(productList == null)
+            {
+                return BadRequest($"Invalid type of '{productType}'.");
+            }
+
+            return productList;
+        }
+``` 
+14. The GetProductType method also needs to be implemented. In the same file ProductController.cs add a new private method:
+```c#
+    private async Task<ActionResult<IEnumerable<Product>>> GetProductType(string? productType)
+    {
+        IQueryable<Product> query = _context.Products;
+
+        switch(productType.ToLower()){
+            case "fashion":
+                return await query.OfType<Fashion>().ToListAsync();
+            case "books":
+                return await query.OfType<Book>().ToListAsync();;
+            default:
+                //type does not exist
+                return null;
+        }
+
+    }
+```
+15. The above code will check the value being passed in for the productType and then return the correct list based on its type. Load up the Swagger UI to test and verify. 
 
 ## Related Articles
 
