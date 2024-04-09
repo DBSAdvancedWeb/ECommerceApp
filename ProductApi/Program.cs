@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ProductApi.Models;
+using ECommerceCommon.Models;
 using ProductApi.Data;
 
 

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductApi.Data;
-using ProductApi.Models;
+using ECommerceCommon.Models;
 
 namespace ProductApi.Controllers
 {
