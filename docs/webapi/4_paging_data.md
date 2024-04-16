@@ -123,19 +123,27 @@ builder.Services.AddScoped<IProductService, ProductService>();
 ```
 10. Go back to the ProductController and lets fix up the code to make it use our new ProductService. 
 ```c#
+//add reference to new service
 using ProductApi.Services;
-
 ...
-private readonly ILogger<ProductController> _logger;
-private readonly ProductsDbContext _context;
-private readonly IProductService _productService;
 
-public ProductController(ILogger<ProductController> logger, ProductsDbContext context, IProductService productService)
+namespace ProductApi.Controllers
 {
-    _logger = logger;
-    _context = context;
-    _productService = productService;
-}
+    //update our route to use the new paths
+    [Route("api/v1/products")]
+    [ApiController]
+    public class ProductController : ControllerBase
+    {
+        private readonly ILogger<ProductController> _logger;
+        private readonly ProductsDbContext _context;
+        private readonly IProductService _productService;
+
+        public ProductController(ILogger<ProductController> logger, ProductsDbContext context, IProductService productService)
+        {
+            _logger = logger;
+            _context = context;
+            _productService = productService;
+        }
 ```
 11. Next, we will create two new method called GetBooks and GetFashions:
 ```c#
