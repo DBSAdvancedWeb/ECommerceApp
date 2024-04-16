@@ -6,6 +6,7 @@
 # dotenv files
 .env
 
+
 # User-specific files
 *.rsuser
 *.suo
@@ -482,3 +483,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Data import files for csv
+*.csv

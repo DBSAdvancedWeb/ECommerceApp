@@ -6,47 +6,52 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductApi.Data;
+using ECommerceCommon.Responses;
 using ECommerceCommon.Models;
+using ProductApi.Services;
 
 namespace ProductApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/products")]
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private readonly ILogger<ProductController> _logger;
         private readonly ProductsDbContext _context;
+        private readonly IProductService _productService;
 
-        public ProductController(ProductsDbContext context)
+        public ProductController(ILogger<ProductController> logger, ProductsDbContext context, IProductService productService)
         {
+            _logger = logger;
             _context = context;
+            _productService = productService;
         }
 
-        // GET: api/Product
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string? productType)
+        [HttpGet("books")]
+        public async Task<ActionResult<ProductListResponse<Book>>> GetBooks(int page = 1, int pageSize = 10)
         {
-            var productList = await GetProductType(productType);
-
-            if(productList == null)
-            {
-                return BadRequest($"Invalid type of '{productType}'.");
-            }
-
-            return productList;
+            var productList = await _productService.GetListOfProductsByType<Book>(page, pageSize);
+            return Ok(productList);
         }
 
-        [HttpGet("categories")]
-        public async Task<ActionResult<IEnumerable<IGrouping<string?, Product>>>> GetProductCategories()
+        [HttpGet("fashion")]
+        public async Task<ActionResult<ProductListResponse<Fashion>>> GetFashion(int page = 1, int pageSize = 10)
         {
-            var products = await _context.Products.ToListAsync();
-
-            if(products ==  null){
-                return Ok(new List<IGrouping<string?, Product>>());
-            }
-            var categories = products.GroupBy(item => item.Category)
-                                         .Select(group => new { category = group.Key, products = group.ToList() });
-            return Ok(categories);
+            var productList = await _productService.GetListOfProductsByType<Fashion>(page, pageSize);
+            return Ok(productList);
         }
+
+        // public async Task<ActionResult<IEnumerable<IGrouping<string?, Product>>>> GetProductCategories()
+        // {
+        //     var products = await _context.Products.ToListAsync();
+
+        //     if(products ==  null){
+        //         return Ok(new List<IGrouping<string?, Product>>());
+        //     }
+        //     var categories = products.GroupBy(item => item.Category)
+        //                                  .Select(group => new { category = group.Key, products = group.ToList() });
+        //     return Ok(categories);
+        // }
 
         // GET: api/Product/5
         [HttpGet("{id}")]
@@ -130,22 +135,6 @@ namespace ProductApi.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private async Task<ActionResult<IEnumerable<Product>>> GetProductType(string? productType)
-        {
-            IQueryable<Product> query = _context.Products;
-
-            switch(productType.ToLower()){
-                case "fashion":
-                    return await query.OfType<Fashion>().ToListAsync();
-                case "books":
-                    return await query.OfType<Book>().ToListAsync();;
-                default:
-                    //type does not exist
-                    return null;
-            }
-
         }
 
         private bool ProductExists(Guid id)
