@@ -18,8 +18,6 @@ public class ProductApiService : IProductApiServices
 
         var baseUrl = _configuration["ApiConfig:ProductApi:BaseUrl"];
 
-        _logger.LogInformation("Base Address: " + baseUrl);
-
         if(baseUrl == null) {
             _logger.LogError("A base Uri needs to be set for the Product API!");    
         }else{ 

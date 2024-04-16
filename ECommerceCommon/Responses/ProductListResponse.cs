@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using ECommerceCommon.Models;
 
-namespace CommonLibrary.Responses;
-public class ProductListResponse
+namespace ECommerceCommon.Responses;
+public class ProductListResponse<T>
 {
     public Paging paging {get; set;}
 
-    public IEnumerable<T> data {get; set;}
+    public List<T> data {get; set;}
 }
